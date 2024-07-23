@@ -24,6 +24,7 @@ body {
 .tracker, .dashboard {
     width: 100%;
     margin: 10px;
+    box-sizing: border-box;
 }
 
 h1, h2 {
