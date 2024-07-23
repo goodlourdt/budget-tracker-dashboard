@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Income-Expense Budget Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="tracker">
+            <h1>Income-Expense Budget Dashboard</h1>
+            <form id="budget-form">
+                <div class="input-group">
+                    <label for="income-label">Income Label:</label>
+                    <input type="text" id="income-label" name="income-label" placeholder="e.g., Payroll">
+                </div>
+                <div class="input-group">
+                    <label for="income">Income Amount:</label>
+                    <input type="number" id="income" name="income" placeholder="e.g., 1000">
+                </div>
+                <div class="input-group">
+                    <label for="expense-label">Expense Label:</label>
+                    <input type="text" id="expense-label" name="expense-label" placeholder="e.g., Groceries">
+                </div>
+                <div class="input-group">
+                    <label for="expense">Expense Amount:</label>
+                    <input type="number" id="expense" name="expense" placeholder="e.g., 200">
+                </div>
+                <div class="input-group">
+                    <label for="date">Date:</label>
+                    <input type="date" id="date" name="date" required>
+                </div>
+                <button type="submit">Add to Budget</button>
+                <button type="button" id="clear-data">Clear Data</button>
+            </form>
+            <div class="balance">
+                <h2>Balance: <span id="balance">₱0.00</span></h2>
+            </div>
+        </div>
+        <div class="dashboard">
+            <h2>Weekly Records</h2>
+            <ul id="record-list"></ul>
+            <h2>Summary</h2>
+            <canvas id="summaryChart" width="400" height="200"></canvas>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
