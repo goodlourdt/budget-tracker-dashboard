@@ -1,11 +1,12 @@
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    margin: 0;
 }
 
 .container {
@@ -17,12 +18,11 @@ body {
     max-width: 1200px;
     box-sizing: border-box;
     display: flex;
-    justify-content: space-between;
     flex-wrap: wrap;
 }
 
 .tracker, .dashboard {
-    width: 45%;
+    width: 100%;
     margin: 10px;
 }
 
@@ -94,4 +94,10 @@ button#clear-data:hover {
 
 #record-list li.expense {
     color: red;
+}
+
+@media (min-width: 768px) {
+    .tracker, .dashboard {
+        width: 48%;
+    }
 }
