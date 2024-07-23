@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const recordList = document.getElementById('record-list');
     const clearDataButton = document.getElementById('clear-data');
     const summaryChartElement = document.getElementById('summaryChart');
+    
     let balance = 0;
     let weeklyRecords = [];
     let summaryChart;
@@ -13,9 +14,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     form.addEventListener('submit', (e) => {
         e.preventDefault();
-        const incomeLabel = document.getElementById('income-label').value;
+        const incomeLabel = document.getElementById('income-label').value.trim();
         const income = parseFloat(document.getElementById('income').value);
-        const expenseLabel = document.getElementById('expense-label').value;
+        const expenseLabel = document.getElementById('expense-label').value.trim();
         const expense = parseFloat(document.getElementById('expense').value);
         const date = document.getElementById('date').value;
 
@@ -63,11 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
         weeklyRecords.forEach(record => {
             const li = document.createElement('li');
             li.textContent = `${record.date} - ${record.label}: ₱${record.amount.toFixed(2)}, Balance: ₱${record.balance.toFixed(2)}`;
-            if (record.type === 'income') {
-                li.classList.add('income');
-            } else {
-                li.classList.add('expense');
-            }
+            li.classList.add(record.type);
             recordList.appendChild(li);
         });
     }
@@ -92,8 +89,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function updateChart() {
-        const incomeTotal = weeklyRecords.filter(r => r.type === 'income').reduce((sum, r) => sum + r.amount, 0);
-        const expenseTotal = weeklyRecords.filter(r => r.type === 'expense').reduce((sum, r) => sum + r.amount, 0);
+        const incomeTotal = weeklyRecords
+            .filter(r => r.type === 'income')
+            .reduce((sum, r) => sum + r.amount, 0);
+        const expenseTotal = weeklyRecords
+            .filter(r => r.type === 'expense')
+            .reduce((sum, r) => sum + r.amount, 0);
 
         if (summaryChart) {
             summaryChart.destroy();
@@ -110,7 +111,19 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             options: {
                 responsive: true,
-                maintainAspectRatio: false
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(tooltipItem) {
+                                return `₱${tooltipItem.raw.toFixed(2)}`;
+                            }
+                        }
+                    }
+                }
             }
         });
     }
